@@ -27,8 +27,3 @@ securityContext:
     - ALL
   privileged: false
   readOnlyRootFilesystem: true
-
-template: |
-  this is
-  template
-  my dude
