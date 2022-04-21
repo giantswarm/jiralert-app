@@ -1,0 +1,12 @@
+apiVersion: v2
+appVersion: 0.0.1
+
+name: jiralert-app
+
+description: Alertmanager plugin that creates Jira tickets
+
+home: https://github.com/giantswarm/jiralert-app
+
+version: 0.0.0-dev # [[ .Version ]] if you're using architect instead of app-build-suite
+annotations:
+  application.giantswarm.io/team: "security"
