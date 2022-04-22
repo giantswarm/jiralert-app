@@ -1,0 +1,29 @@
+name: jiralert
+serviceType: managed
+
+# project:
+#   branch: "[[ .Branch ]]"
+#   commit: "[[ .SHA ]]"
+
+image:
+  registry: docker.io
+  name: giantswarm/jiralert
+  tag: 1.1
+  pullPolicy: IfNotPresent
+
+pod:
+  user:
+    id: 1000
+  group:
+    id: 1000
+
+nodeSelector: {}
+
+# container securityContext
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
