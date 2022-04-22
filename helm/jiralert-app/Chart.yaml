@@ -7,6 +7,6 @@ description: Alertmanager plugin that creates Jira tickets
 
 home: https://github.com/giantswarm/jiralert-app
 
-version: 0.0.0-dev # [[ .Version ]] if you're using architect instead of app-build-suite
+version: [[ .Version ]]
 annotations:
   application.giantswarm.io/team: "security"
