@@ -1,7 +1,7 @@
 apiVersion: v2
 appVersion: 0.0.1
 
-name: jiralert-app
+name: jiralert
 
 description: Alertmanager plugin that creates Jira tickets
 
