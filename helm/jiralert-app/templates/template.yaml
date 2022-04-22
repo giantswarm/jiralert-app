@@ -20,3 +20,4 @@ kind: ConfigMap
 metadata:
   name: "{{ include "resource.default.name"  . }}-template"
   namespace: {{ include "resource.default.namespace"  . }}
+
