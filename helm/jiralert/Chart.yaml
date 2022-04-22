@@ -9,4 +9,4 @@ home: https://github.com/giantswarm/jiralert-app
 
 version: [[ .Version ]]
 annotations:
-  application.giantswarm.io/team: "security"
+  application.giantswarm.io/team: "shield"
