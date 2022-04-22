@@ -6,7 +6,7 @@ serviceType: managed
 #   commit: "[[ .SHA ]]"
 
 image:
-  registry: quay.io
+  registry: docker.io
   name: giantswarm/jiralert
   tag: 1.1
   pullPolicy: IfNotPresent
