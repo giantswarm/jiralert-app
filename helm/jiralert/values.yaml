@@ -50,12 +50,12 @@ securityContext:
 
 jiralert:
   config:
-      api_url: "https://example.atlassian.net/"
-      issue_type: "Task"
-      issue_priority: "Critical"
-      reopen_state: "To Do"
-      resolution: "Won't Fix"
-      reopen_duration: "0h"
+    api_url: "https://example.atlassian.net/"
+    issue_type: "Task"
+    issue_priority: "Critical"
+    reopen_state: "To Do"
+    resolution: "Won't Fix"
+    reopen_duration: "0h"
   credentials:
     jira_username: "jira_username@example.com"
     jira_password: "P@$$w0rd!"
