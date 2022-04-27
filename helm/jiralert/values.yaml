@@ -1,9 +1,9 @@
 name: jiralert
 serviceType: managed
 
-# project:
-#   branch: "[[ .Branch ]]"
-#   commit: "[[ .SHA ]]"
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
 
 image:
   registry: docker.io
