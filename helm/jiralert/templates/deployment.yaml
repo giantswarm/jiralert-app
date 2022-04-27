@@ -50,18 +50,42 @@ spec:
       securityContext:
         runAsUser: {{ .Values.pod.user.id }}
         runAsGroup: {{ .Values.pod.group.id }}
+      initContainers:
+      - name: "set-jira-credentials"
+        image: "{{ .Values.init.registry }}/{{ .Values.init.name }}:{{ .Values.init.tag }}"
+        volumeMounts:
+        - name: config-dir
+          mountPath: "config"
+        - name: config
+          mountPath: "tmp/jiralert.tmp"
+          subPath: "jiralert.yml"
+        env:
+        - name: JIRA_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: "{{ include "name" . }}-credentials"
+              key: "jira_username"
+              optional: false
+        - name: JIRA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ include "name" . }}-credentials"
+              key: "jira_password"
+              optional: false
+        command:
+        - "/bin/sh"
+        args:
+        - "-c"
+        - "/bin/sed -e s/JIRA_USERNAME/$JIRA_USERNAME/ -e s/JIRA_PASSWORD/$JIRA_PASSWORD/ /tmp/jiralert.tmp > /config/jiralert.yml"
       containers:
       - name: {{ include "name" . }}
         image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         volumeMounts:
-        - name: config
-          mountPath: "config/jiralert.yml"
-          subPath: "jiralert.yaml"
-          readOnly: true
+        - name: config-dir
+          mountPath: "config/"
         - name: template
           mountPath: "config/jiralert.tmpl"
           subPath: "jiralert.tmpl"
-          readOnly: true
         ports:
         - containerPort: 9097
           protocol: TCP
@@ -69,6 +93,8 @@ spec:
         securityContext:
           {{- . | toYaml | nindent 10 }}
         {{- end }}
+        resources:
+          {{- .Values.resources | toYaml | nindent 10 }}
       volumes:
       - name: config
         configMap:
@@ -76,3 +102,5 @@ spec:
       - name: template
         configMap:
           name: "{{ include "resource.default.name"  . }}-template"
+      - name: config-dir
+        emptyDir: {}

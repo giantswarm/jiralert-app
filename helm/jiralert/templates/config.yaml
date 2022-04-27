@@ -1,62 +1,48 @@
 apiVersion: v1
 data:
-  jiralert.yaml: |
-  {{- if .Values.config }}
-    {{- .Values.config | trim | nindent 4 -}}
-  {{- else -}}
-  {{`
+  jiralert.yml: |
     defaults:
+      {{ with .Values.jiralert.config }}
       # API access fields.
-      api_url: https://jiralert.atlassian.net
-      user: jiralert
-      password: 'JIRAlert'
+      user: 'JIRA_USERNAME'
+      password: 'JIRA_PASSWORD'    
+      api_url: {{ .api_url | quote }}
 
       # The type of JIRA issue to create. Required.
-      issue_type: Bug
-      # Issue priority. Optional.
-      priority: Critical
-      # Go template invocation for generating the summary. Required.
-      summary: '{{ template "jira.summary" . }}'
-      # Go template invocation for generating the description. Optional.
-      description: '{{ template "jira.description" . }}'
-      # State to transition into when reopening a closed issue. Required.
-      reopen_state: "To Do"
-      # Do not reopen issues with this resolution. Optional.
-      wont_fix_resolution: "Won't Fix"
-      # Amount of time after being closed that an issue should be reopened, after which, a new issue is created.
-      # Optional (default: always reopen)
-      reopen_duration: 0h
+      issue_type: {{ .issue_type | quote }}
 
+      # Issue priority. Optional.
+        {{- if .issue_priority }}
+      priority: {{ .issue_priority | quote }}
+        {{- end }}
+
+      # Go template invocation for generating the summary. Required.
+      summary: {{`'{{ template "jira.summary" . }}'`}}
+
+      # Go template invocation for generating the description. Required.
+      description: {{`'{{ template "jira.description" . }}'`}}
+
+      # State to transition into when reopening a closed issue. Required.
+      reopen_state: {{ .reopen_state | quote }}
+
+      # Do not reopen issues with this resolution. Optional. 
+        {{- if .resolution }}
+      wont_fix_resolution: {{ .resolution | quote }}
+        {{- end }}
+
+      # Amount of time after being closed that an issue should be reopened, after which, a new issue is created.
+        {{- if .reopen_duration }}
+      reopen_duration: {{ .reopen_duration | quote }}
+        {{- end }}
+      {{ end }}
     # Receiver definitions. At least one must be defined.
     receivers:
-        # Must match the Alertmanager receiver name. Required.
-      - name: 'jira-ab'
-        # JIRA project to create the issue in. Required.
-        project: AB
-        # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
-        add_group_labels: false
-
-      - name: 'jira-xy'
-        project: XY
-        # Overrides default.
-        issue_type: Task
-        # JIRA components. Optional.
-        components: ['Operations']
-        # Standard or custom field values to set on created issue. Optional.
-        #
-        # See https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#setting-custom-field-data-for-other-field-types for further examples.
-        fields:
-          # TextField
-          customfield_10001: "Random text"
-          # SelectList
-          customfield_10002: {"value": "red"}
-          # MultiSelect
-          customfield_10003: [{"value": "red"}, {"value": "blue"}, {"value": "green"}]
-
+      {{- range .Values.jiralert.receivers }}
+      - {{ . | toYaml | nindent 8 | trim }}
+      {{ end }}
     # File containing template definitions. Required.
-    template: jiralert.tmpl `}}
-  {{- end }}
+    template: jiralert.tmpl
 kind: ConfigMap
 metadata:
-  name: "{{ include "resource.default.name"  . }}-config"
+  name: {{ include "resource.default.name"  . }}-config
   namespace: {{ include "resource.default.namespace"  . }}
