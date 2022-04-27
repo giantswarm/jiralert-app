@@ -2,7 +2,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ include "resource.psp.name" . }}
+  name: {{ include "resource.default.name" . }}-psp
   labels:
     {{- include "labels.common" . | nindent 4 }}
 spec:
