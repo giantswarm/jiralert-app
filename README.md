@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/giantswarm/jiralert-app.svg?style=shield)](https://circleci.com/gh/giantswarm/jiralert-app)
 
-# jiralert-app chart
+# Jiralert chart
 
 Giant Swarm offers a [Jiralert](https://github.com/prometheus-community/jiralert/) App which can be installed in workload clusters.
 Here we define the jiralert-app chart with its templates and default configuration.
@@ -45,7 +45,7 @@ jiralert:
     # Find another example in https://github.com/prometheus-community/jiralert/blob/master/examples/jiralert.yml
 
       # Name must match the Alertmanager receiver name. Required.
-    - name: 'alertmanager-receiver'
+    - name: 'jiralert-receiver'
       # JIRA project to create the issue in. Required.
       project: JIR
       # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
