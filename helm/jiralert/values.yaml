@@ -1,9 +1,9 @@
 name: jiralert
 serviceType: managed
 
-# project:
-#   branch: "[[ .Branch ]]"
-#   commit: "[[ .SHA ]]"
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
 
 image:
   registry: docker.io
@@ -11,13 +11,33 @@ image:
   tag: 1.1
   pullPolicy: IfNotPresent
 
+init:
+  registry: docker.io
+  name: giantswarm/busybox
+  tag: 1.34.1
+
 pod:
   user:
     id: 1000
   group:
     id: 1000
 
+psp:
+  enabled: true
+
+networkPolicy:
+  enabled: true
+
 nodeSelector: {}
+
+# container resources
+resources:
+  requests:
+    cpu: 100m
+    memory: 220Mi
+  limits:
+    cpu: 100m
+    memory: 220Mi
 
 # container securityContext
 securityContext:
@@ -27,3 +47,34 @@ securityContext:
     - ALL
   privileged: false
   readOnlyRootFilesystem: true
+
+jiralert:
+  config:
+    api_url: "https://example.atlassian.net/"
+    issue_type: "Task"
+    reopen_state: "To Do"
+    resolution: "Won't Fix"
+  credentials:
+    jira_username: "jira_username@example.com"
+    jira_password: "P@$$w0rd!"
+  receivers:
+    # Receiver name must match the Alertmanager receiver name. Required.
+    - name: 'jira-ab'
+      # JIRA project to create the issue in. Required.
+      project: AB
+      # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
+      add_group_labels: false
+
+    - name: 'jira-xy'
+      project: XY
+      # Issue type. Overrides default. Optional.
+      issue_type: Task
+      # Standard or custom field values to set on created issue. Optional.
+      # See https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#setting-custom-field-data-for-other-field-types for further examples.
+      fields:
+        # TextField
+        customfield_10001: "Random text"
+        # SelectList
+        customfield_10002: '{"value": "red"}'
+        # MultiSelect
+        customfield_10003: '[{"value": "red"}, {"value": "blue"}, {"value": "green"}]'

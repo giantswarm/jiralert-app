@@ -13,15 +13,3 @@ room for such suffix.
 {{- define "resource.default.namespace" -}}
 {{ .Release.Namespace }}
 {{- end -}}
-
-{{- define "resource.networkPolicy.name" -}}
-{{- include "resource.default.name" . -}}-network-policy
-{{- end -}}
-
-{{- define "resource.psp.name" -}}
-{{- include "resource.default.name" . -}}-psp
-{{- end -}}
-
-{{- define "resource.pullSecret.name" -}}
-{{- include "resource.default.name" . -}}-pull-secret
-{{- end -}}

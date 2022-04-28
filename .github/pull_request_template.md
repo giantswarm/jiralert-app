@@ -14,7 +14,7 @@ This PR:
 
 ### Testing
 
-Description on how {APP-NAME} can be tested.
+Description on how jiralert-app can be tested.
 
 - [ ] fresh install works
   - [ ] AWS
@@ -24,14 +24,6 @@ Description on how {APP-NAME} can be tested.
   - [ ] AWS
   - [ ] Azure
   - [ ] KVM
-
-#### Other testing
-
-Description of features to additionally test for {APP-NAME} installations.
-
-- [ ] check reconciliation of existing resources after upgrading
-- [ ] X still works after upgrade
-- [ ] Y is installed correctly
 
 <!--
 Changelog must always be updated.
