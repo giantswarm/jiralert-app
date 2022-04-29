@@ -7,4 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/giantswarm/REPOSITORY_NAME/tree/master
+- Add Jiralert app chart
+
+[Unreleased]: https://github.com/giantswarm/jiralert-app/tree/master
