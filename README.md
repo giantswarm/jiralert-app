@@ -5,7 +5,7 @@
 Giant Swarm offers a [Jiralert](https://github.com/prometheus-community/jiralert/) App which can be installed in workload clusters.
 Here we define the jiralert-app chart with its templates and default configuration.
 
-Jiralert is an [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) plugin that uses receivers to create Jira tickets on the configured projects.
+Jiralert is an [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) plugin that uses receivers to create Jira tickets in the configured projects.
 
 ## Installing
 
