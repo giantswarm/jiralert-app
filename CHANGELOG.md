@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Removed sample credentials to allow external secrets.
+
 ## [0.0.1] - 2022-04-29
 
 - Add Jiralert app chart
