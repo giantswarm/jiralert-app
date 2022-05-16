@@ -54,9 +54,6 @@ jiralert:
     issue_type: "Task"
     reopen_state: "To Do"
     resolution: "Won't Fix"
-  credentials:
-    jira_username: "jira_username@example.com"
-    jira_password: "P@$$w0rd!"
   receivers:
     # Receiver name must match the Alertmanager receiver name. Required.
     - name: 'jira-ab'

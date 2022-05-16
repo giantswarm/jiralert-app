@@ -80,9 +80,9 @@ alertmanager:
         receiver: 'jiralert-receiver'
         group_by: ['namespace']
     receivers:
-    - name: 'jiralert'
+    - name: 'jiralert-receiver'
       webhook_configs:
-      - url: 'http://jiralert.jiralert:9097/alert'
+      - url: 'http://jiralert:9097/alert'
         send_resolved: false
 additionalPrometheusRulesMap: 
   example-rules:
