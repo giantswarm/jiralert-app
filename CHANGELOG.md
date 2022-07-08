@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated `Jiralert` to version 1.2. This version adds the auto-resolve feature.
+
 ## [0.0.2] - 2022-05-16
 
 ### Changed
