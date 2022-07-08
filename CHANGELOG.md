@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2022-07-08
+
 ### Changed
 
 - Updated `Jiralert` to version 1.2. This version adds the auto-resolve feature.
@@ -21,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Jiralert app chart
 
-[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/giantswarm/jiralert-app/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/giantswarm/jiralert-app/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/giantswarm/jiralert-app/releases/tag/v0.0.1
