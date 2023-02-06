@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: [[ .AppVersion ]]
+appVersion: 1.2
 
 name: jiralert
 
@@ -7,6 +7,6 @@ description: Alertmanager plugin that creates Jira tickets
 
 home: https://github.com/giantswarm/jiralert-app
 
-version: [[ .Version ]]
+version: 0.1.0
 annotations:
   application.giantswarm.io/team: "shield"
