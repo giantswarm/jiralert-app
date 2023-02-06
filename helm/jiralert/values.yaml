@@ -8,7 +8,7 @@ project:
 image:
   registry: docker.io
   name: giantswarm/jiralert
-  tag: 1.2
+  tag: 1.2-extra-functions
   pullPolicy: IfNotPresent
 
 init:
