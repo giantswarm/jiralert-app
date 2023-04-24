@@ -2,10 +2,9 @@ apiVersion: v2
 appVersion: "1.2"
 
 name: jiralert
-
 description: Alertmanager plugin that creates Jira tickets
-
 home: https://github.com/giantswarm/jiralert-app
+icon: https://s.giantswarm.io/app-icons/prometheus/1/light.svg
 
 version: [[ .Version ]]
 annotations:
