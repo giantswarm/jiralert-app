@@ -41,13 +41,12 @@ resources:
 
 # container securityContext
 securityContext:
-  seccompProfile:
-    type: RuntimeDefault
   allowPrivilegeEscalation: false
   capabilities:
     drop:
     - ALL
   privileged: false
+  runAsNonRoot: true
   readOnlyRootFilesystem: true
 
 jiralert:
