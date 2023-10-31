@@ -1,6 +1,11 @@
 name: jiralert
 serviceType: managed
 
+# Enable PSPs
+global:
+  podSecurityStandards:
+    enforced: false
+
 project:
   branch: "[[ .Branch ]]"
   commit: "[[ .SHA ]]"
@@ -46,6 +51,7 @@ securityContext:
     drop:
     - ALL
   privileged: false
+  runAsNonRoot: true
   readOnlyRootFilesystem: true
 
 jiralert:

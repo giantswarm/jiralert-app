@@ -50,6 +50,9 @@ spec:
       securityContext:
         runAsUser: {{ .Values.pod.user.id }}
         runAsGroup: {{ .Values.pod.group.id }}
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       initContainers:
       - name: "set-jira-credentials"
         image: "{{ .Values.init.registry }}/{{ .Values.init.name }}:{{ .Values.init.tag }}"
@@ -72,6 +75,10 @@ spec:
               name: "{{ include "name" . }}-credentials"
               key: "jira_password"
               optional: false
+        {{- with .Values.securityContext }}
+        securityContext:
+          {{- . | toYaml | nindent 10 }}
+        {{- end }}
         command:
         - "/bin/sh"
         args:
