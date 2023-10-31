@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add default Seccomp profile to Seployment.
+- Make app PSS compliant.
 
 ## [0.1.1] - 2023-04-24
 
