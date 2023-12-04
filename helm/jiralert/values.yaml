@@ -11,13 +11,13 @@ project:
   commit: "[[ .SHA ]]"
 
 image:
-  registry: docker.io
+  registry: gsoci.azurecr.io
   name: giantswarm/jiralert
   tag: 1.2-extra-functions
   pullPolicy: IfNotPresent
 
 init:
-  registry: docker.io
+  registry: gsoci.azurecr.io
   name: giantswarm/busybox
   tag: 1.34.1
 
@@ -49,7 +49,7 @@ securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-    - ALL
+      - ALL
   privileged: false
   runAsNonRoot: true
   readOnlyRootFilesystem: true
