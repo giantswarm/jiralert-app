@@ -1,11 +1,15 @@
 apiVersion: v2
-appVersion: "1.2"
-
 name: jiralert
 description: Alertmanager plugin that creates Jira tickets
+version: 0.0.1-dev
+appVersion: 0.0.1-dev
 home: https://github.com/giantswarm/jiralert-app
 icon: https://s.giantswarm.io/app-icons/prometheus/1/light.svg
-
-version: [[ .Version ]]
 annotations:
   application.giantswarm.io/team: "shield"
+  config.giantswarm.io/version: 1.x.x
+  ui.giantswarm.io/logo: https://s.giantswarm.io/app-icons/prometheus/1/light.svg
+restrictions:
+  clusterSingleton: true
+  fixedNamespace: kube-system
+  gpuInstances: false
