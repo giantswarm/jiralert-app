@@ -84,6 +84,8 @@ spec:
         args:
         - "-c"
         - "/bin/sed -e s/JIRA_USERNAME/$JIRA_USERNAME/ -e s/JIRA_PASSWORD/$JIRA_PASSWORD/ /tmp/jiralert.tmp > /config/jiralert.yml"
+        resources:
+          {{- .Values.initResources | toYaml | nindent 10 }}
       containers:
       - name: {{ include "name" . }}
         image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
