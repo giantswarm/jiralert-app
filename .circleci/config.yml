@@ -7,7 +7,7 @@ workflows:
     jobs:
       - architect/push-to-app-catalog:
           context: "architect"
-          # executor: "app-build-suite" # uncomment this if you want automatic metadata generation and helm chart linting
+          executor: "app-build-suite"
           name: "package and push jiralert-app chart"
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"

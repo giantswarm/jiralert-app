@@ -35,6 +35,15 @@ networkPolicy:
 
 nodeSelector: {}
 
+# init container resources
+initResources:
+  requests:
+    cpu: 100m
+    memory: 220Mi
+  limits:
+    cpu: 100m
+    memory: 220Mi
+
 # container resources
 resources:
   requests:
