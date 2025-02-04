@@ -1,4 +1,6 @@
 replace-chart-version-with-git: true
 generate-metadata: true
-chart-dir: ./helm/{APP-NAME}
+chart-dir: ./helm/jiralert
 destination: ./build
+
+catalog-base-url: https://giantswarm.github.io/giantswarm-catalog/
