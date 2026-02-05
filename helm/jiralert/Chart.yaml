@@ -8,4 +8,6 @@ icon: https://s.giantswarm.io/app-icons/prometheus/1/light.svg
 
 version: 0.1.3
 annotations:
-  application.giantswarm.io/team: "shield"
+  io.giantswarm.application.audience: all
+  io.giantswarm.application.managed: "true"
+  io.giantswarm.application.team: shield
