@@ -2,7 +2,7 @@
 
 ## Assumptions
 
-This guide uses ['Loki Distributed'](https://github.com/grafana/helm-charts/tree/main/charts/loki-distributed) chart as an example which is one of the charts held in upstream `helm-charts` repo. 
+This guide uses ['Loki Distributed'](https://github.com/grafana/helm-charts/tree/main/charts/loki-distributed) chart as an example which is one of the charts held in upstream `helm-charts` repo.
 
 I want to easily track it, but also be able to submit patches to upstream as well as make some specific changes that
 I never want to go to upstream.
@@ -34,7 +34,7 @@ The three repos we're going to use are:
 - Chart repo. The "chart repo" is the one where we keep a single chart we want to build for the app
   platform. Here we apply all the changes and patches that we need to make it work, but also don't
   really want to send to "upstream" (so, any Giant Swarm specific stuff).
-  
+
 ## Setting up repos
 
 Everything here will be shown as an example based on the
@@ -65,13 +65,13 @@ We will use the "upstream copy" repo in the following way:
 - `upstream-main` - to directly track `main`/`master` branch from "upstream". This branch is read-only
   for us; we only use it to synchronize with "upstream". We set it up by adding
   a new remote and setting merge config for it:
-  
+
   ```
   git checkout -b "upstream-main"
   git remote add -f upstream https://github.com/grafana/helm-charts.git
   git branch -u upstream/main
   git push origin upstream-main
-  # now we can pull changes from "upstream"/main and merge to our "upstream copy"/upstream-main  
+  # now we can pull changes from "upstream"/main and merge to our "upstream copy"/upstream-main
   ```
 - or using the new Git syntax:
   ```
@@ -105,17 +105,17 @@ Now, we add code from "upstream-copy" as subtree. We have 2 options here:
 
 1. We add the whole "upstream-copy" repo, as it is in `main` branch, as a subdirectory in the current
    repo
-   
+
    ```
    git subtree add --prefix helm/loki-app upstream-copy main --squash
    git push
    ```
-   
+
    That's it, now your `helm/loki-app` has the same content as is present in the `main` branch of
    `upstream-copy` remote. The `--squash` option squashes all the incoming commits into one big commit,
    which is a good thing, as otherwise you'll put all the commits from upstream into your local repo
    and make the history really noisy.
-   
+
 2. More complex scenario: we want to add only the `charts/loki-distributed` subdirectory from the
    `main` branch of `upstream-copy`. To do that, we first need to use the `subtree split` command to
    go over all commits and split only these that altered files in this directory into a temporary
@@ -128,7 +128,7 @@ Now, we add code from "upstream-copy" as subtree. We have 2 options here:
    git checkout master
    git subtree add --squash -P helm/loki-distributed temp-split-branch
    ```
-   
+
    Important: here we use `main` from `upstream-copy` as the state we want Most probably it makes more
    sense for you to use some other state of the `upstream-copy`, like a `vX.Y.Z` tag, which means a
    stable release of the chart. Here we're tracking the cutting edge in `main` repo.
@@ -169,7 +169,7 @@ skip the `--skip-tags` flag, as explained [above in set up instructions](#chart-
   ```
   git checkout upstream-main
   git fetch upstream
-  git merge upstream/main  
+  git merge upstream/main
   # create PR in github from upstream-main to main XOR run
   git checkout main
   git merge upstream-main
@@ -178,21 +178,21 @@ skip the `--skip-tags` flag, as explained [above in set up instructions](#chart-
 
 2. In "chart repo"
   - if the subtree is tracking the whole "upstream copy" repo
-  
+
   ```
   git fetch upstream-copy main
-  git subtree pull --prefix helm/loki-app upstream-copy main --squash  
+  git subtree pull --prefix helm/loki-app upstream-copy main --squash
   ```
-  
+
   - if the subtree is tracking a subdir of "upstream copy":
-  
+
   ```
   git fetch upstream-copy main  # fetch the most recent state from "upstream copy/main"
   git checkout upstream-copy/main  # it's OK to be in detached head, we won't change anything
   git subtree split -P charts/loki-distributed -b temp-split-branch
   git checkout master
   git subtree merge --squash -P helm/loki temp-split-branch
-  git push 
+  git push
   git branch -D temp-split-branch
   ```
 
@@ -205,10 +205,10 @@ is accepted by upstream (so, you'll get your patch applied and then get it from 
 - create a branch "my-feature" from "upstream-main"
 - when ready, create a PR for "upstream"
 - when PR is merged, remove local "my-feature" branch and update our dependencies as in [normal upstream update](#I-want-to-update-to-the-latest-version-from-upstream)
- 
+
 ### I want to send urgent patch for upstream and use it already
 
-Do this if you want to submit a patch for "upstream" and you need to use it right away, without waiting 
+Do this if you want to submit a patch for "upstream" and you need to use it right away, without waiting
 for being accepted by upstream:
 
 - go to "upstream copy", update remote "upstream" and fetch changes into the "upstream-main" branch
@@ -220,7 +220,7 @@ for being accepted by upstream:
 
 ### I want to make changes that I don't want to be ever sent to upstream
 
-Do this if you want to make any Giant Swarm specific changes to the chart. 
+Do this if you want to make any Giant Swarm specific changes to the chart.
 We have two options about where to do that and it's up to you to think where it makes the most
 sense.
 
@@ -228,7 +228,7 @@ sense.
 
   - just do it - you can commit and change anything you want in the "subtree" catalog and your
     changes won't be lost when you update it.
-  
+
 2. In the "upstream copy" repo - makes sense for cases where multiple charts include some shared
    sub-chart and you want to patch it.
 
@@ -251,14 +251,14 @@ In general, we have two options here:
    Now we remove the code from our repo, then include
    it again in the exactly same `vX.Y.Z` version, but this time using the `git-subtree` command.
    Then, we apply our
-   patch file on the subtree and commit it. From now on, we can do any update as 
+   patch file on the subtree and commit it. From now on, we can do any update as
    [described above](#i-want-to-update-to-the-latest-version-from-upstream).
-   
+
    Example: I want to switch my `grafana-app` repo to use git subtree from "upstream copy". I know
    that my repo in the commit `1111111` has the same code as the "upstream" repo had in
    the `grafana-6.1.3` tag. We also want to do the migration in separate branch `switch-to-subtree`
    to be able to create a valid PR for the change and not work on the `master` directly.
-   
+
    ```
    git checkout -b switch-to-subtree
    git diff 1111111 -- helm/grafana-app > chart.diff
@@ -272,15 +272,15 @@ In general, we have two options here:
    git commit -am "applied custom changes"
    # you're ready continue with updating to the current state
    ```
-   
+
 2) Manual way. We copy our current state somewhere (outside the current git tree), then we remove all
    the code we want to get from "upstream" or "upstream-copy". We add the code back using `git subtree`.
    Then we manually go over our backup copy and apply any chnages needed by editing the code. Then we
-   commit the changes. From now on, we can do any update as 
+   commit the changes. From now on, we can do any update as
    [described above](#i-want-to-update-to-the-latest-version-from-upstream).
-   
+
    Example:
-   
+
    ```
    git checkout -b switch-to-subtree
    cp -a helm/grafana-app /tmp

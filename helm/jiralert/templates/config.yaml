@@ -5,7 +5,7 @@ data:
       {{ with .Values.jiralert.config }}
       # API access fields.
       user: 'JIRA_USERNAME'
-      password: 'JIRA_PASSWORD'    
+      password: 'JIRA_PASSWORD'
       api_url: {{ .api_url | quote }}
 
       # The type of JIRA issue to create. Required.
@@ -25,7 +25,7 @@ data:
       # State to transition into when reopening a closed issue. Required.
       reopen_state: {{ .reopen_state | quote }}
 
-      # Do not reopen issues with this resolution. Optional. 
+      # Do not reopen issues with this resolution. Optional.
         {{- if .resolution }}
       wont_fix_resolution: {{ .resolution | quote }}
         {{- end }}
