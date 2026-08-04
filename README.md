@@ -23,7 +23,7 @@ There are several ways to install this app onto a workload cluster.
 ```yaml
 template: |
     {{ define "jira.summary" }}Jira summary template{{ end }}
-    
+
     {{ define "jira.description" }}Jira description template{{ end }}
 
 jiralert:
@@ -40,7 +40,7 @@ jiralert:
       resolution: "Won't Fix"
       # Amount of time after being closed that an issue should be reopened, after which, a new issue is created. Optional (default: always reopen)
       reopen_duration: "0h"
-  receivers: 
+  receivers:
     # Set one or more receivers
     # Find another example in https://github.com/prometheus-community/jiralert/blob/master/examples/jiralert.yml
 
@@ -84,12 +84,12 @@ alertmanager:
       webhook_configs:
       - url: 'http://jiralert:9097/alert'
         send_resolved: false
-additionalPrometheusRulesMap: 
+additionalPrometheusRulesMap:
   example-rules:
     groups:
     - name: example-rule-group
       rules:
-      - alert: ExampleRule 
+      - alert: ExampleRule
         expr: example_metrics{namespace="default"}
         annotations:
           summary: "New alert for {{ $labels.namespace }}"

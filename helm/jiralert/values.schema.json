@@ -1,6 +1,7 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
+    "additionalProperties": true,
     "properties": {
         "global": {
             "type": "object",
@@ -100,6 +101,23 @@
                         "properties": {
                             "add_group_labels": {
                                 "type": "boolean"
+                            },
+                            "fields": {
+                                "type": "object",
+                                "properties": {
+                                    "customfield_10001": {
+                                        "type": "string"
+                                    },
+                                    "customfield_10002": {
+                                        "type": "string"
+                                    },
+                                    "customfield_10003": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "issue_type": {
+                                "type": "string"
                             },
                             "name": {
                                 "type": "string"
