@@ -1,13 +1,49 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
-    "additionalProperties": true,
+    "additionalProperties": false,
     "properties": {
+        "baseDomain": {
+            "type": "string"
+        },
+        "bootstrapMode": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "chartOperator": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ciliumNetworkPolicy": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "cluster": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "clusterCA": {
+            "type": "string"
+        },
+        "clusterCIDR": {
+            "type": "string"
+        },
+        "clusterDNSIP": {
+            "type": "string"
+        },
+        "clusterID": {
+            "type": "string"
+        },
+        "gcpProject": {
+            "type": "string"
+        },
         "global": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "podSecurityStandards": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "enforced": {
                             "type": "boolean"
@@ -18,6 +54,7 @@
         },
         "image": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "name": {
                     "type": "string"
@@ -35,6 +72,7 @@
         },
         "init": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "name": {
                     "type": "string"
@@ -49,9 +87,11 @@
         },
         "initResources": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "limits": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -63,6 +103,7 @@
                 },
                 "requests": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -76,9 +117,11 @@
         },
         "jiralert": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "config": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "api_url": {
                             "type": "string"
@@ -98,12 +141,14 @@
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "additionalProperties": false,
                         "properties": {
                             "add_group_labels": {
                                 "type": "boolean"
                             },
                             "fields": {
                                 "type": "object",
+                                "additionalProperties": false,
                                 "properties": {
                                     "customfield_10001": {
                                         "type": "string"
@@ -135,6 +180,7 @@
         },
         "networkPolicy": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "enabled": {
                     "type": "boolean"
@@ -142,13 +188,16 @@
             }
         },
         "nodeSelector": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false
         },
         "pod": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "group": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "id": {
                             "type": "integer"
@@ -157,6 +206,7 @@
                 },
                 "user": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "id": {
                             "type": "integer"
@@ -167,6 +217,7 @@
         },
         "project": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "branch": {
                     "type": "string"
@@ -176,8 +227,12 @@
                 }
             }
         },
+        "provider": {
+            "type": "string"
+        },
         "psp": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "enabled": {
                     "type": "boolean"
@@ -186,9 +241,11 @@
         },
         "resources": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "limits": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -200,6 +257,7 @@
                 },
                 "requests": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -213,12 +271,14 @@
         },
         "securityContext": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "allowPrivilegeEscalation": {
                     "type": "boolean"
                 },
                 "capabilities": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "drop": {
                             "type": "array",
@@ -240,6 +300,9 @@
             }
         },
         "serviceType": {
+            "type": "string"
+        },
+        "subscriptionID": {
             "type": "string"
         }
     }
