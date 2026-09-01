@@ -1,3 +1,5 @@
+# Kept for backwards compatibility with existing App configuration; the chart
+# derives its `app.kubernetes.io/name` label from the chart name.
 name: jiralert
 serviceType: managed
 
