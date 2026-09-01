@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-09-01
+
 ### Added
 
 - Add `io.giantswarm.application.audience` and `io.giantswarm.application.managed` chart annotations for Backstage visibility.
@@ -54,7 +56,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Jiralert app chart
 
-[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/giantswarm/jiralert-app/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/giantswarm/jiralert-app/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/giantswarm/jiralert-app/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/giantswarm/jiralert-app/compare/v0.0.3...v0.1.0
