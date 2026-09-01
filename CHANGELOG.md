@@ -18,11 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update architect-orb to v6.12.0.
 - Regenerate `.github/workflows/zz_generated.*.yaml` via devctl to use the centralized reusable workflow, removing the Node-20 `mindsers/changelog-reader-action` dependency.
 - Regenerate values.schema.json for the strict schema configuration.
-
-## [0.1.3] - 2023-12-11
-
-### Changed
-
 - Configure `gsoci.azurecr.io` as the default container image registry.
 
 ## [0.1.2] - 2023-10-31
@@ -59,8 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Jiralert app chart
 
-[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.1.3...HEAD
-[0.1.3]: https://github.com/giantswarm/jiralert-app/compare/v0.1.2...v0.1.3
+[Unreleased]: https://github.com/giantswarm/jiralert-app/compare/v0.1.2...HEAD
 [0.1.2]: https://github.com/giantswarm/jiralert-app/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/giantswarm/jiralert-app/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/giantswarm/jiralert-app/compare/v0.0.3...v0.1.0
