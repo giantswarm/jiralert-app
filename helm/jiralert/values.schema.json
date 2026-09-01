@@ -126,7 +126,13 @@
                         "api_url": {
                             "type": "string"
                         },
+                        "issue_priority": {
+                            "type": "string"
+                        },
                         "issue_type": {
+                            "type": "string"
+                        },
+                        "reopen_duration": {
                             "type": "string"
                         },
                         "reopen_state": {
@@ -137,41 +143,12 @@
                         }
                     }
                 },
+                "credentials": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
                 "receivers": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                            "add_group_labels": {
-                                "type": "boolean"
-                            },
-                            "fields": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "customfield_10001": {
-                                        "type": "string"
-                                    },
-                                    "customfield_10002": {
-                                        "type": "string"
-                                    },
-                                    "customfield_10003": {
-                                        "type": "string"
-                                    }
-                                }
-                            },
-                            "issue_type": {
-                                "type": "string"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "project": {
-                                "type": "string"
-                            }
-                        }
-                    }
+                    "type": "array"
                 }
             }
         },
@@ -189,7 +166,7 @@
         },
         "nodeSelector": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "pod": {
             "type": "object",
@@ -214,6 +191,10 @@
                     }
                 }
             }
+        },
+        "podAnnotations": {
+            "type": "object",
+            "additionalProperties": true
         },
         "project": {
             "type": "object",
@@ -303,6 +284,9 @@
             "type": "string"
         },
         "subscriptionID": {
+            "type": "string"
+        },
+        "template": {
             "type": "string"
         }
     }
