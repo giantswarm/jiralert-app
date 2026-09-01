@@ -33,7 +33,10 @@ psp:
 networkPolicy:
   enabled: true
 
-nodeSelector: {}
+nodeSelector: {}  # @schema additionalProperties: true
+
+# Extra annotations for the jiralert pod.
+podAnnotations: {}  # @schema additionalProperties: true
 
 # init container resources
 initResources:
@@ -63,30 +66,57 @@ securityContext:
   runAsNonRoot: true
   readOnlyRootFilesystem: true
 
+# Contents of the jiralert.tmpl file holding the Go template definitions
+# (`jira.summary`, `jira.description`) jiralert renders issues with. Leave empty
+# to use the templates shipped with the chart.
+template: ""
+
 jiralert:
+  # Jira credentials. Set both to have the chart create the credentials secret,
+  # or leave empty and bring your own `<release>-credentials` secret.
+  credentials: {}  # @schema skipProperties: true; additionalProperties: true
+  # jira_username: "EXAMPLE_USERNAME"
+  # jira_password: "P@$$w0rd!"
   config:
     api_url: "https://example.atlassian.net/"
     issue_type: "Task"
+    # Issue priority. Optional, left out of the config when empty.
+    issue_priority: ""
     reopen_state: "To Do"
     resolution: "Won't Fix"
-  receivers:
-    # Receiver name must match the Alertmanager receiver name. Required.
-    - name: 'jira-ab'
-      # JIRA project to create the issue in. Required.
-      project: AB
-      # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
-      add_group_labels: false
-
-    - name: 'jira-xy'
-      project: XY
-      # Issue type. Overrides default. Optional.
-      issue_type: Task
-      # Standard or custom field values to set on created issue. Optional.
-      # See https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#setting-custom-field-data-for-other-field-types for further examples.
-      fields:
-        # TextField
-        customfield_10001: "Random text"
-        # SelectList
-        customfield_10002: '{"value": "red"}'
-        # MultiSelect
-        customfield_10003: '[{"value": "red"}, {"value": "blue"}, {"value": "green"}]'
+    # Amount of time after being closed that an issue should be reopened, after
+    # which a new issue is created (e.g. "3h"). Optional, left out of the config
+    # when empty.
+    reopen_duration: ""
+  # Receiver definitions. At least one must be defined for jiralert to start.
+  # Receivers are passed to jiralert verbatim, so every per-receiver option
+  # jiralert supports can be set here; jiralert validates them itself.
+  receivers: []
+  # Receiver name must match the Alertmanager receiver name. Required.
+  # - name: 'jira-ab'
+  #   # JIRA project to create the issue in. Required.
+  #   project: AB
+  #   # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
+  #   add_group_labels: false
+  #
+  # - name: 'jira-xy'
+  #   project: XY
+  #   # Issue type. Overrides the default from `jiralert.config`. Optional.
+  #   issue_type: Task
+  #   # Go template invocations overriding the defaults. Optional.
+  #   summary: '{{ template "jira.summary" . }}'
+  #   description: '{{ template "jira.description" . }}'
+  #   # Resolve the issue once all alerts of the group are resolved. Optional.
+  #   auto_resolve:
+  #     state: Done
+  #   components:
+  #     - alerting
+  #   # Standard or custom field values to set on the created issue. Optional.
+  #   # See https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#setting-custom-field-data-for-other-field-types for further examples.
+  #   fields:
+  #     # TextField
+  #     customfield_10001: "Random text"
+  #     # SelectList
+  #     customfield_10002: '{"value": "red"}'
+  #     # MultiSelect
+  #     customfield_10003: '[{"value": "red"}, {"value": "blue"}, {"value": "green"}]'
