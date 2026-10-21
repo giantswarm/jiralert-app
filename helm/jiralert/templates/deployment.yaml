@@ -112,4 +112,5 @@ spec:
         configMap:
           name: "{{ include "resource.default.name"  . }}-template"
       - name: config-dir
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 32Mi
